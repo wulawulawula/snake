@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "es2015",
+    "target": "es2015",
+    "strict": true,
+    "noEmitOnError": true,
+  },
+  // 包括哪些文件，**表示任意目录，*表示任意文件
+  "include": ["src/**/*"]
+}
