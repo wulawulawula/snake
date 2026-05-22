@@ -1,0 +1,64 @@
+@bg-color:#b7d4a8;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font: bold 20px 'Courier';
+}
+.box {
+    width: 360px;
+    height: 420px;
+    border-radius: 15px;
+    border: 10px solid #000;
+    background-color: @bg-color;
+    // padding: 20px 28px;
+    margin: 100px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    .innerBox {
+        border: 2px solid #000;
+        height: 304px;
+        width: 304px;
+        position: relative;
+        #snake {
+            // &表示该选择器的父级选择器
+            &>div {
+                width: 10px;
+                height: 10px;
+                background-color: #000;
+                border: 1px solid @bg-color;
+                position: absolute;
+            }
+        }
+        #food {
+            position: absolute;
+            left: 40px;
+            top: 100px;
+            width: 10px;
+            height: 10px;
+            display: flex;
+            // 设置横轴为主轴，warp表示允许换行
+            flex-flow: row wrap;
+            // 主轴空间平均分布
+            justify-content: space-around;
+            // 侧轴空间平均分布
+            align-content: space-around;
+            &>div {
+                width: 4px;
+                height: 4px;
+                background-color: #000;
+                // 旋转45度
+                transform: rotate(45deg);
+            }
+        }
+    }
+    .word {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+    }
+}

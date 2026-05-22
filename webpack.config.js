@@ -4,6 +4,8 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { extensions } = require("interpret");
 const { isArrowFunction } = require("typescript");
+const { options } = require("less");
+const { Browser } = require("bonjour-service");
 // webpack中的所有的配置信息都应该写在module.exports中
 module.exports = {
   // 指定入口文件
@@ -61,6 +63,30 @@ module.exports = {
         // 要排除的文件
         exclude: /node_modules/,
       },
+      // less文件处理
+      {
+        test:/\.less$/,
+        use:[
+          "style-loader",
+          "css-loader",
+          {
+            loader:"postcss-loader",
+            options:{
+              postcssOptions:{
+                plugins:[
+                  [
+                    "postcss-preset-env",
+                    {
+                      browser:'list 2 versions'
+                    }
+                  ]
+                ]
+              }
+            }
+          },
+          "less-loader"
+        ]
+      }
     ],
   },
 
@@ -68,12 +94,12 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       // title:'这是一个自定义的title',
-      // template: "./src/index.html",
+      template: "./src/index.html",
     }),
   ],
 //   用来设置引用的模块
   resolve:{
     // 当我们在项目中引入模块时，如果没有写模块的后缀名，webpack会自动添加后缀名去寻找这个模块
-    extensions:[".ts",".js"]
+    extensions:[".ts",".js",".less"]
   }
 };
