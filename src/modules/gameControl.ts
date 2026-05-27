@@ -9,7 +9,7 @@ class GameControl {
     food: Food;
     scorePanel: ScorePanel;
     direction: string = '';
-
+    isLive: boolean = true;
     constructor() {
         this.snake = new Snake();
         this.food = new Food();
@@ -49,7 +49,7 @@ class GameControl {
         this.snake.X = X
         this.snake.Y = Y
 
-        setTimeout(this.move.bind(this), 300 - (this.scorePanel.level - 1) * 30);
+       this.isLive && setTimeout(this.move.bind(this), 300 - (this.scorePanel.level - 1) * 30);
     }
 }
 
