@@ -45,11 +45,33 @@ class GameControl {
                 X += 10
                 break;
         }
+        // 修改X和Y的值
+        this.checkFood(X, Y)
+        try {
+            this.snake.X = X
+            this.snake.Y = Y
+            this.snake.checkHeadBody()
+        } catch (error) {
+            if (error instanceof Error) {
+                alert(error.message)
+                this.isLive = false
+                return
+            }
+        }
+        this.isLive && setTimeout(this.move.bind(this), 300 - (this.scorePanel.level - 1) * 30);
+        
+    }
 
-        this.snake.X = X
-        this.snake.Y = Y
-
-       this.isLive && setTimeout(this.move.bind(this), 300 - (this.scorePanel.level - 1) * 30);
+    // 检查是否吃到食物了
+    checkFood(X:number,Y:number){
+        if(X === this.food.XY[0] && Y === this.food.XY[1]){
+            // 重置食物的位置
+            this.food.change()
+            // 增加分数
+            this.scorePanel.addScore()
+            // 增加蛇的身体
+            this.snake.addBody()
+        }
     }
 }
 
